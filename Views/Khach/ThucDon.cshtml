@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebNC.Models.MonAn>
+
+@{
+    ViewBag.Title = "Thực đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <img src="~/Content/Images/thucdonnen.jpg" style="width:100%;height:600px" />
+</div>
+<div class="container body-content" style="text-align:center;margin-top:20px">
+    <h3><b>Thực đơn</b></h3>
+    <p>Các sảnh của K&H Venue đều nhìn ra khu vườn nhiệt đới với thác nước cùng hồ bơi ngoài trời rộng rãi. Tại đây, tận hưởng thú vui ẩm thực với tiệc buffet sang trọng của nhà hàng với những món ngon khắp thế giới được chế biến từ nguyên liệu tuyển chọn trong không gian tràn ngập ánh sáng từ những khung cửa kính rộng, nhiều món ăn danh tiếng đẳng cấp thế giới và tốt nhất thành phố.</p>
+    <hr/>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-sm-4" style="padding-bottom:20px">
+                <div class="card" style="width:auto;height:300px">
+                    <img class="card-img-top" src="~/Content/Images/MonAn/@item.HinhMonAn" alt="Card image" style="width:100%; height:200px">
+                    <div class="card-body" style="text-align:center">
+                        <h4>@Html.DisplayFor(modelItem => item.TenMonAn)</h4>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

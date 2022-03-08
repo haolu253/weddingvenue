@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebNC.Models.Menu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">QUẢN LÝ THỰC ĐƠN</h2>
+
+<table class="table" style="text-align:center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenMenu)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenMenu)
+    </td>
+    <td>
+        <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Sửa" onclick="location.href='@Url.Action("Edit", "ThucDon", new { id = item.MenuID })'" />
+        <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Xóa" onclick="location.href='@Url.Action("Delete", "ThucDon", new { id = item.MenuID })'" />
+    </td>
+</tr>
+}
+
+</table>
+<div class="container" style="text-align:right">
+    <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Thêm thực đơn" onclick="location.href='@Url.Action("Create", "ThucDon")'" />
+</div>

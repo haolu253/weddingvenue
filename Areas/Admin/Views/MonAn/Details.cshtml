@@ -1,0 +1,36 @@
+﻿@model WebNC.Models.MonAn
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>CHI TIẾT MÓN ĂN</h2>
+
+<div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                <b style="font-size:24px">@Html.DisplayFor(model => model.TenMonAn)</b>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GiaMonAn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GiaMonAn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Menu.TenMenu)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Menu.TenMenu)
+            </dd>
+            <dd>
+                <img src="~/Content/Images/MonAn/@Model.HinhMonAn" class="img-thumbnail" style="width: 300px;height: 200px" />
+            </dd>
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Trở về", "Index")
+</p>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebNC.Models.DatTiec>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">QUẢN LÝ TIỆC CƯỚI</h2>
+<form action="@Url.Action("Searching","DatTiec")" style="text-align:right;padding-bottom:20px">
+    <label>Tên Chú rể hoặc Cô dâu:</label>
+    <input name="ten" class="form-control" style="display:inline" />
+    <input id="search" type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Tìm" />
+</form>
+<table class="table" style="text-align:center">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKhach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChuRe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Menu.TenMenu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sanh.TenSanh)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DichVu.TenDichVu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTiec)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.TenKhach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuRe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.TenMenu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sanh.TenSanh)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DichVu.TenDichVu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaTiec)
+            </td>
+            <td>
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Đổi" onclick="location.href='@Url.Action("Edit", "DatTiec", new { id = item.TiecID })'" />
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Hủy" onclick="location.href='@Url.Action("Delete", "DatTiec", new { id = item.TiecID })'" />
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="container" style="text-align:right">
+    <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Đặt tiệc" onclick="location.href='@Url.Action("Create", "DatTiec")'" />
+</div>

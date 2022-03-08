@@ -1,0 +1,44 @@
+﻿@model WebNC.Models.MonAn
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>XÓA MÓN ĂN</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <b style="font-size:24px">@Html.DisplayFor(model => model.TenMonAn)</b>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaMonAn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GiaMonAn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu.TenMenu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Menu.TenMenu)
+        </dd>
+        <dd>
+            <img src="~/Content/Images/MonAn/@Model.HinhMonAn" class="img-thumbnail" style="width: 300px;height: 200px" />
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Xóa" /> |
+            @Html.ActionLink("Trở về", "Index")
+        </div>
+    }
+
+</div>

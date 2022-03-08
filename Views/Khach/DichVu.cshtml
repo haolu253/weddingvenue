@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebNC.Models.DichVu>
+
+@{
+    ViewBag.Title = "Dịch vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <img src="~/Content/Images/dichvunen.jpg" style="width:100%;height:600px" />
+</div>
+<div class="container body-content" style="text-align:center;margin-top:20px">
+    <h3><b>Dịch vụ</b></h3>
+    <p>Chúng tôi là một thương hiệu uy tín - chất lượng. Trên 10 năm kinh nghiệm trong nghề, với đội ngũ nhân viên năng động, nhiệt tình, tận tâm, được đào tạo chuyên nghiệp và theo phương châm "HẠNH PHÚC CỦA BẠN LÀ CỦA CHÚNG TÔI" - "PHỤC VỤ HẾT LÒNG NHƯ TRANG TRÍ TIỆC CƯỚI CHO NGƯỜI THÂN TRONG GIA </p>
+    @foreach (var item in Model)
+    {
+        <hr />
+        <h4>@Html.DisplayFor(modelItem => item.TenDichVu)</h4>
+        <img src="~/Content/Images/DichVu/@item.HinhDichVu" class="img-thumbnail" style="width:1000px; height:500px" />
+        <p>@Html.DisplayFor(modelItem => item.HinhThuc)</p>
+        <p>Giá: @Html.DisplayFor(modelItem => item.GiaDichVu)</p>
+    }
+</div>

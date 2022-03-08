@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebNC.Models.KhachHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">QUẢN LÝ KHÁCH HÀNG</h2>
+<form action="@Url.Action("Searching","KhachHang")" style="text-align:right;padding-bottom:20px">
+    <label>Tên Khách hàng:</label>
+    <input name="ten" class="form-control" style="display:inline" />
+    <input id="search" type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Tìm" />
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKhach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Sửa" onclick="location.href='@Url.Action("Edit", "KhachHang", new { id = item.KhachID })'" />
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Xóa" onclick="location.href='@Url.Action("Delete", "KhachHang", new { id = item.KhachID })'" />
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="container" style="text-align:right">
+    <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Thêm khách hàng" onclick="location.href='@Url.Action("Create", "KhachHang")'" />
+</div>

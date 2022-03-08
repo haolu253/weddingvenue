@@ -1,0 +1,36 @@
+﻿@model WebNC.Models.DichVu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>CHI TIẾT DỊCH VỤ</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <b style="font-size:24px">@Html.DisplayFor(model => model.TenDichVu)</b>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaDichVu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GiaDichVu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhThuc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HinhThuc)
+        </dd>
+        <dd>
+            <img src="~/Content/Images/DichVu/@Model.HinhDichVu" class="img-thumbnail" style="width: 300px;height: 200px" />
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Trở về", "Index")
+</p>

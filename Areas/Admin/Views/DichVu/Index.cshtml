@@ -1,0 +1,56 @@
+﻿@model IEnumerable<WebNC.Models.DichVu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">QUẢN LÝ DỊCH VỤ</h2>
+<form action="@Url.Action("Searching","DichVu")" style="text-align:right;padding-bottom:20px">
+    <label>Tên dịch vụ:</label>
+    <input name="tendichvu" class="form-control" style="display:inline" />
+    <input id="search" type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Tìm" />
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDichVu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaDichVu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhDichVu)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDichVu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaDichVu)
+            </td>
+            <td>
+                <img src="~/Content/Images/DichVu/@item.HinhDichVu" class="img-thumbnail" style="width:200px; height:200px" />
+            </td>
+            <td>
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Sửa" onclick="location.href='@Url.Action("Edit", "DichVu", new { id = item.DichVuID })'" />
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Chi tiết" onclick="location.href='@Url.Action("Details", "DichVu", new { id = item.DichVuID })'" />
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Xóa" onclick="location.href='@Url.Action("Delete", "DichVu", new { id = item.DichVuID })'" />
+            </td>
+        </tr>
+    }
+</table>
+<div class="container" style="text-align:right">
+    <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Thêm dịch vụ" onclick="location.href='@Url.Action("Create", "DichVu")'" />
+</div>

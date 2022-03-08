@@ -1,0 +1,62 @@
+﻿@model WebNC.Models.DichVu
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>SỬA THÔNG TIN DỊCH VỤ</h2>
+
+@using (Html.BeginForm("Edit", "DichVu", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.DichVuID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenDichVu, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenDichVu, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenDichVu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HinhThuc, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HinhThuc, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HinhThuc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GiaDichVu, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GiaDichVu, new { htmlAttributes = new { @min = "1", type = "number", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GiaDichVu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HinhDichVu, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Content/Images/DichVu/@Model.HinhDichVu" style="height:120px; width:auto;" />
+            @Html.TextBox("postedFile", "", new { @class = "input-file", type = "file" })
+        </div>
+    </div>
+    <input hidden value="@Model.HinhDichVu" name="HinhDichVu" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Lưu" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Trở về", "Index")
+</div>
+

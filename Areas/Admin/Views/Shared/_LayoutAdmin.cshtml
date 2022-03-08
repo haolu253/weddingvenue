@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/0c347a59c7.js" crossorigin="anonymous"></script>
+
+    <title>K&H Venue Admin</title>
+</head>
+<body style="padding-top:0px;">
+    <div class="container-fluid" style="height:100%">
+    <div class="row">
+    <div class="col-lg-3">
+        <div class="navbar-nav sidebar sidebar-dark " style="background-color:#d9b08c;height:100%" id="sidebar">
+            <div class="py-4 px-3 mb-4" style="background-color:#744025">
+                <div class="media d-flex align-items-center">
+                    <img src="~/Content/Images/admin.jpg" width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+                    <div class="media-body">
+                        <h4 class="m-0" style="color:#d9b08c">K&H Venue</h4>
+                        <p class="mb-0" style="color:#d9b08c">Admin</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-gray font-weight-bold px-3 pb-4 mb-0">QUẢN LÝ</p>
+            <ul class="nav flex-column mb-0">
+                <li class="nav-item">
+                    <a href=@Url.Action("Index","Sanh") class="nav-link text-dark font-italic">
+                        <i class="fas fa-home"></i>                 
+                        Sảnh
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href=@Url.Action("Index","MonAn") class="nav-link text-dark font-italic">
+                        <i class="fas fa-utensils"></i>
+                        Món ăn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href=@Url.Action("Index","ThucDon") class="nav-link text-dark font-italic">
+                        <i class="fas fa-clipboard"></i>
+                        Thực đơn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href=@Url.Action("Index","DichVu") class="nav-link text-dark font-italic">
+                        <i class="fas fa-ring"></i>
+                        Dịch vụ
+                    </a>
+                </li>
+            </ul>
+
+            <p class="text-gray font-weight-bold px-3 pb-4 mb-0">KHÁCH HÀNG</p>
+
+            <ul class="nav flex-column mb-0">
+                <li class="nav-item">
+                    <a href=@Url.Action("Index","KhachHang") class="nav-link text-dark font-italic">
+                        <i class="fas fa-user-friends"></i>
+                        Khách hàng
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href=@Url.Action("Index","DatTiec") class="nav-link text-dark font-italic">
+                        <i class="fas fa-glass-cheers"></i>    
+                        Đặt tiệc
+                    </a>
+                </li>
+            </ul>
+            <p class="text-gray font-weight-bold px-3 pb-4 mb-0"><a href="/Login/Index"><i class="fas fa-sign-out-alt"></i>ĐĂNG XUẤT</a></p>
+</div>
+    </div>
+    <div class="col-lg-9">
+        @RenderBody()
+        <hr />
+    </div>
+    </div>
+    </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

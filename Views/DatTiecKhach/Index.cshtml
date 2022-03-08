@@ -1,0 +1,91 @@
+﻿@model IEnumerable<WebNC.Models.DatTiec>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="text-align:center">
+    <img src="~/Content/Images/dattiec1.jpg" style="width:100%;height:600px" />
+    <h3><b>Đặt tiệc</b></h3>
+    <p>Lễ cưới là một sự kiện vô cùng thiêng liêng của các cặp đôi. Nó là kết tinh của một tình yêu đẹp đã trải qua thời gian gắn bó sâu sắc để hiểu nhau.</p>
+</div>
+<hr />
+
+<form action="@Url.Action("Searching","DatTiecKhach")" style="text-align:right;padding-bottom:20px">
+    <label>Tên Chú rể hoặc Cô dâu:</label>
+    <input name="ten" class="form-control" style="display:inline" />
+    <input id="search" type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Tìm" />
+</form>
+<table class="table" style="text-align:center">
+    <tr>
+
+        <th>
+            Tên Khách hàng
+        </th>
+        <th>
+            Tên Chú rể
+        </th>
+        <th>
+            Tên Cô dâu
+        </th>
+        <th>
+            Thực đơn
+        </th>
+        <th>
+            Sảnh tổ chức
+        </th>
+
+        <th>
+            Ngày tổ chức
+        </th>
+        <th>
+            Dịch vụ thêm
+        </th>
+        <th>
+            Số bàn
+        </th>
+        <th>
+            Giá tiệc
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.TenKhach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuRe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.TenMenu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sanh.TenSanh)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DichVu.TenDichVu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaTiec)
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="container-fluid" style="text-align:right;padding-right:50px">
+    <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Đặt tiệc" onclick="location.href='@Url.Action("Create", "DatTiecKhach")'" />
+</div>

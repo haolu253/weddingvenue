@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebNC.Models.Sanh>
+
+@{
+    ViewBag.Title = "Sảnh tiệc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <img src="~/Content/Images/sanhtiecnen.jpg" style="width:100%;height:600px" />
+</div>
+<div class="container body-content" style="text-align:center;margin-top:20px">
+    <h3><b>Sảnh tiệc</b></h3>
+    <p>Tổ chức một đám cưới trong mơ tại một trong những phòng khiêu vũ của chúng tôi hoặc bên bể bơi ngoài trời tuyệt đẹp. Gói dịch vụ đám cưới của chúng tôi được thiết kế phù hợp với nhiều thị hiếu và phong cách. Đồ ăn tuyệt hảo, dịch vụ chuyên nghiệp và giá trị tối đa – là cam kết của chúng tôi! Từ các nghi lễ tới tiếp đón, cắm hoa tới tạo băng, bánh cưới tới thực đơn theo yêu cầu, các chuyên viên giàu kinh nghiệm của chúng tôi sẽ cung cấp cho quý vị dịch vụ cá nhân. </p>
+    @foreach (var item in Model)
+    {
+        <hr />
+        <h4>@Html.DisplayFor(modelItem => item.TenSanh)</h4>
+        <img src="~/Content/Images/Sanh/@item.HinhSanh" class="img-thumbnail" style="width:100%; height:500px" />
+        <p>@Html.DisplayFor(modelItem => item.MoTa)</p>
+    }
+</div>

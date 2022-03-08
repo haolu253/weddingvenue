@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebNC.Models.Sanh>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">QUẢN LÝ SẢNH</h2>
+
+<form action="@Url.Action("Searching","Sanh")" style="text-align:right;padding-bottom:20px">
+    <label>Tên sảnh:</label>
+    <input name="tensanh" class="form-control" style="display:inline" />
+    <input id="search" type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Tìm" />
+</form>
+<table class="table" style="text-align:center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhSanh)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanh)
+            </td>
+            <td width="500px">
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                <img src="~/Content/Images/Sanh/@item.HinhSanh" class="img-thumbnail" style="width:200px; height:200px" />
+            </td>
+            <td>
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Sửa" onclick="location.href='@Url.Action("Edit", "Sanh", new { id = item.SanhID })'" />
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Chi tiết" onclick="location.href='@Url.Action("Details", "Sanh", new { id = item.SanhID })'" />
+                <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Xóa" onclick="location.href='@Url.Action("Delete", "Sanh", new { id = item.SanhID })'" />
+            </td>
+        </tr>
+    }
+</table>
+<div class="container" style="text-align:right">
+    <input type="button" class="btn btn-info" style="background-color:#d9b08c" value="Thêm sảnh" onclick="location.href='@Url.Action("Create", "Sanh")'" />
+</div>
+

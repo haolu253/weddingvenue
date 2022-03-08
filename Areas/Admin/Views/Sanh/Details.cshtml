@@ -1,0 +1,24 @@
+﻿@model WebNC.Models.Sanh
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";}
+
+<h2>CHI TIẾT SẢNH</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd style="text-align:center">
+            <b style="font-size:24px">@Html.DisplayFor(model => model.TenSanh)</b>
+        </dd>
+        <dd>
+            <img src="~/Content/Images/Sanh/@Model.HinhSanh" class="img-thumbnail" style="width: 1100px;height: 500px" />
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Trở về", "Index")
+</p>

@@ -1,0 +1,185 @@
+﻿@model WebNC.Models.DatTiec
+@using WebNC.Models;
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true
+            });
+
+        });
+    </script>
+}
+@{
+    var dichvu = (List<DichVu>)ViewBag.DichVu;
+    var sanh = (List<Sanh>)ViewBag.Sanh;
+    var monan = (List<MonAn>)ViewBag.MonAn;
+    var menu = (List<Menu>)ViewBag.Menu;
+    var User = (KhachHang)Session[WebNC.Common.Constant.USER_INFO];
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding-top:20px;text-align:center">ĐẶT TIỆC</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container body-content" style="padding-left:100px;padding-right:100px">
+        <div class="form-horizontal">
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.KhachID, "Tên Khách hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("KhachID", null, htmlAttributes: new { @class = "form-control" })*@
+                    <input value="@User.TenKhach" class="form-control" readonly />
+                    <input hidden name="KhachID" value="@User.KhachID" />
+                    @Html.ValidationMessageFor(model => model.KhachID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ChuRe, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ChuRe, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ChuRe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CoDau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CoDau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CoDau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.MenuID, "MenuID", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-10">
+                        @Html.DropDownList("MenuID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MenuID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <select name="MenuID" id="menu" class="menu" style="margin-left:15px">
+                @for (int i = 0; i < menu.Count; i++)
+                {
+                    var monanbymenu = monan.Where(x => x.MenuID == menu[i].MenuID).ToList();
+                    for (int j = 0; j < monanbymenu.Count; j++)
+                    {
+                        <option value="@menu[i].MenuID" data-gia="@monan[j].GiaMonAn" data-ten="@monan[j].TenMonAn" selected>@menu[i].TenMenu</option>
+                    }
+                }
+            </select>
+            <br />
+            <p style="margin-left:15px" class="tenmon">
+            <p style="margin-left:15px" class="giamon">
+                <script>
+                    $(function () {
+                        $(".menu").on('change', function (i) {
+                            $(this).siblings(".tenmon").text('Món: ' + $(this).find(":selected").attr("data-ten"));
+                            $(this).siblings(".giamon").text('Giá: ' + $(this).find(":selected").attr("data-gia"));
+                        });
+                    });
+                </script>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SoBan, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SoBan, new { htmlAttributes = new { @min = "1", @max = "100", type = "number", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SoBan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <select name="SanhID" id="sanh" class="sanh" style="margin-left:15px">
+                    @for (int i = 0; i < sanh.Count; i++)
+                    {
+                        <option value="@sanh[i].SanhID" data-src="/Content/Images/Sanh/@sanh[i].HinhSanh" selected>@sanh[i].TenSanh</option>
+
+                    }
+                </select>
+                <br />
+                <img class="item_thumb" src="~/Content/Images/Sanh/sanh5(202068193056845).jpg" style="height:500px;width:900px;margin-left:15px" />
+
+                <script>
+                    $(function () {
+                        $(".sanh").on('change', function () {
+                            $(this).siblings(".item_thumb").attr("src", $(this).find(":selected").attr("data-src"));
+                        });
+
+                    });
+                </script>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NgayDat, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "datepicker" } })
+                        @Html.ValidationMessageFor(model => model.NgayDat, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.GiaTiec, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GiaTiec, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GiaTiec, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.SanhID, "SanhID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("SanhID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SanhID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.DichVuID, "DichVuID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DichVuID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DichVuID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                @Html.LabelFor(model => model.DichVuID, "Dịch vụ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <br />
+                <select name="DichVuID" id="dichvu" class="dichvu" style="margin-left:15px">
+                    @for (int i = 0; i < dichvu.Count; i++)
+                    {
+                        <option value="@dichvu[i].DichVuID" data-src="/Content/Images/DichVu/@dichvu[i].HinhDichVu" data="@dichvu[i].GiaDichVu" selected>@dichvu[i].TenDichVu</option>
+                    }
+                </select>
+                <br />
+                <img class="itemdichvu_thumb" src="~/Content/Images/DichVu/thapruou(2020717192421693).jpg" style="height:500px;width:950px;margin-left:15px" />
+                <p class="giadichvu" style="margin-left:15px">
+                <script>
+                    $(function () {
+                        $(".dichvu").on('change', function () {
+                            $(this).siblings(".itemdichvu_thumb").attr("src", $(this).find(":selected").attr("data-src"));
+                            $(this).siblings(".giadichvu").text('Giá: ' + $(this).find(":selected").attr("data"));
+                        });
+                    });
+                </script>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-info" style="background-color:#d9b08c" value="Đặt tiệc" />
+                <br />
+                @Html.ActionLink("Trở về", "Index")
+            </div>
+        </div>
+    </div>
+}
+
